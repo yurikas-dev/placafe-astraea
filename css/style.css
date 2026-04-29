@@ -9,8 +9,14 @@ body {
   position: relative;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 h1 {
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -19,7 +25,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Jura", sans-serif;
+  font-family: 'Jura', sans-serif;
   font-style: normal;
 }
 h3 {
@@ -38,7 +44,7 @@ input,
 textarea,
 button,
 div {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-style: normal;
   text-decoration: none;
@@ -56,7 +62,7 @@ header {
   position: fixed;
   width: 100%;
   z-index: 50;
-  font-family: "Jura", sans-serif;
+  font-family: 'Jura', sans-serif;
 }
 header > div {
   display: flex;
@@ -86,7 +92,7 @@ header nav menu li:last-child {
 }
 
 header nav menu > li > a {
-  font-family: "Jura", sans-serif;
+  font-family: 'Jura', sans-serif;
   font-weight: 500;
   color: #e0e0e0;
   font-size: 1.3em;
@@ -202,7 +208,7 @@ header nav menu li .dropdown a:hover span {
 }
 
 .subpage .masthead {
-  background: url("../image/page-title.jpeg") no-repeat;
+  background: url('../image/page-title.jpeg') no-repeat;
   background-size: cover;
   width: 100%;
   height: auto;
@@ -216,6 +222,7 @@ header nav menu li .dropdown a:hover span {
   text-shadow: 4px 3px 3px rgba(0, 0, 0, 0.8);
   letter-spacing: 2px;
   z-index: 5;
+  padding: 0 1rem;
 }
 
 /* 
@@ -257,7 +264,7 @@ main section.services .service > div.icon-box {
   background-color: #f4c603;
   width: 8em;
   height: 8em;
-  border-radius: .8em;
+  border-radius: 0.8em;
   /* border-radius: 50%; */
   position: relative;
   margin: 0 auto;
@@ -299,7 +306,6 @@ main section.services .service:nth-child(2) > div span {
   bottom: 20%;
   left: 20%;
   font-size: 1em;
-
 }
 
 main section.services .service > div:hover i.sev-icon {
@@ -430,7 +436,8 @@ main section.products {
 * about page
 */
 .subpage main section.about {
-  width: 960px;
+  max-width: 960px;
+  width: min(100% - 2rem, 960px);
   margin: 3rem auto;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -451,6 +458,7 @@ main section.products {
 .subpage main section.about p {
   line-height: 1.2em;
   letter-spacing: 0.1em;
+  overflow-wrap: break-word;
 }
 .subpage main section.about h4 {
   color: #7a7a7a;
@@ -613,7 +621,7 @@ main section.products {
 */
 footer {
   color: #ffffe5;
-  background: url("../image/footer-bg.jpg") top center no-repeat;
+  background: url('../image/footer-bg.jpg') top center no-repeat;
   background-size: cover;
   padding: 4rem;
   position: relative;
@@ -625,7 +633,7 @@ footer h3 {
   text-align: center;
   margin: 0 0 0.5rem;
   letter-spacing: 1px;
-  font-family: "Dosis", sans-serif;
+  font-family: 'Dosis', sans-serif;
 }
 
 footer p {
@@ -662,10 +670,6 @@ footer .icons ul li a {
     padding: 3rem;
   }
   /* services section */
-  main section.services .service > div {
-    width: 8em;
-    height: 8em;
-  }
   main section.services .service > div i.sev-icon {
     font-size: 4em;
   }
@@ -787,10 +791,12 @@ footer .icons ul li a {
     top: 0;
     left: 0;
     width: 100%;
+    height: 0;
     z-index: 3;
     transition: 0.5s;
     transition-delay: 0.5s;
     overflow: hidden;
+    pointer-events: none;
   }
   .mobile-nav input ~ nav > menu {
     text-align: center;
@@ -818,6 +824,7 @@ footer .icons ul li a {
   .mobile-nav input:checked ~ nav {
     height: 100%;
     transition-delay: 0s;
+    pointer-events: auto;
   }
   .mobile-nav input:checked ~ nav > menu > li {
     opacity: 1;
@@ -828,6 +835,10 @@ footer .icons ul li a {
   .subpage .masthead {
     padding: 120px 0 36px;
   }
+  .masthead h1 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+  }
 
   /* home services section */
   main section.services {
@@ -835,16 +846,18 @@ footer .icons ul li a {
   }
   /* home products section */
   .home main section.products {
-    padding: 2rem 6rem 3rem;
+    padding: 2rem 1rem 3rem;
   }
   .home main section.products > div {
     display: block;
   }
   .home main section.products > div h4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
   }
   .card-row > div {
+    width: min(100%, 540px);
+    margin-left: auto;
+    margin-right: auto;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
   }
@@ -890,16 +903,25 @@ footer .icons ul li a {
     margin-left: 0;
     box-sizing: border-box;
   }
+  .form-input {
+    min-height: 48px;
+  }
+  .form-textarea {
+    min-height: 180px;
+  }
 }
 
 @media screen and (max-width: 600px) {
   /* home page */
+  .home .masthead {
+    padding: 1rem;
+  }
+  .masthead h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
   main section.services > div {
     display: block;
-  }
-  main section.services .service > div {
-    width: 8em;
-    height: 8em;
   }
   main section.services .service > div i.sev-icon {
     font-size: 4em;
@@ -921,10 +943,6 @@ footer .icons ul li a {
   /* home page */
   .home main section.products {
     padding: 2rem;
-  }
-  .home main section.products > div h4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
   }
   .card-row > div {
     padding-bottom: 1rem;
